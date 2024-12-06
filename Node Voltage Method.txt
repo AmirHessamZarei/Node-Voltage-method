@@ -1,0 +1,21 @@
+from sympy import symbols, Eq, solve
+
+V1, V2 = symbols('V1 V2')
+I1 = symbols('I1')
+
+R1 = 10  
+R2 = 20 
+R3 = 30 
+V_s = 12 
+
+eq1 = Eq((V1 - V_s)/R1 + V1/R2 + (V1 - V2)/R3, 0)
+eq2 = Eq((V2 - V1)/R3 + V2/R2, 0)
+
+solution = solve((eq1, eq2), (V1, V2))
+
+current_from_source = (solution[V1] - V_s) / R1
+
+print("Node Voltage:")
+print(f"V1 = {solution[V1]:.2f} V")
+print(f"V2 = {solution[V2]:.2f} V")
+print(f"Source Current: {current_from_source:.2f} A")
